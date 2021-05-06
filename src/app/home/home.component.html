@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row m-4">
+        <div class="text-center col-lg-3">
+            <img src="assets/avatar.jpg" alt="Avatar" class="avatar">
+
+            <h3 class="m-3 text-danger">
+                {{username}}
+            </h3>
+        </div>
+        <div class="col-lg-7">
+            <div class="col text-left">
+                <textarea name="tweet" id="tweet" cols="70" rows="4"></textarea>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-success">Post tweet</button>
+            </div>
+            <div *ngFor="let tweet of tweetList" class="container col">
+                {{tweet.tweet}}
+                <mat-icon>reply</mat-icon>
+            </div>
+        </div>
+
+
+    </div>
+</div>

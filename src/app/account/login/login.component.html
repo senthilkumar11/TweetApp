@@ -1,0 +1,48 @@
+<!-- Default form login -->
+<div class="container-sm p-4" style="max-width: 600px;">
+
+    <form [formGroup]="loginForm" class="text-center border border-light p-5">
+
+        <p class="h4 mb-4">Sign in</p>
+
+        <!-- Email -->
+        <input type="text" id="defaultLoginFormUserName" class="form-control mb-4" formControlName="username" placeholder="User name or E-mail">
+
+        <!-- Password -->
+        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" formControlName="password" placeholder="Password">
+
+
+        <!-- Sign in button -->
+        <button block="true" class="btn btn-primary m-1" type="submit" style="min-width: 200px;" (click)="submit()">Sign in</button>
+
+
+        <div class="d-flex justify-content-around">
+            <!-- Register -->
+            <p>Not a member?
+                <a (click)="navigateToRegidter()" class="link-primary" style="cursor: pointer;">Register</a>
+            </p>
+            <div>
+                <!-- Forgot password -->
+                <a href="">Forgot password?</a>
+            </div>
+        </div>
+
+        <!-- Social login -->
+        <!-- <p>or sign in with:</p> -->
+
+        <!-- <a type="button" class="light-blue-text mx-2">
+        <mdb-icon fab icon="facebook"></mdb-icon>
+    </a>
+    <a type="button" class="light-blue-text mx-2">
+        <mdb-icon fab icon="twitter"></mdb-icon>
+    </a>
+    <a type="button" class="light-blue-text mx-2">
+        <mdb-icon fab icon="linkedin"></mdb-icon>
+    </a>
+    <a type="button" class="light-blue-text mx-2">
+        <mdb-icon fab icon="github"></mdb-icon>
+    </a> -->
+
+    </form>
+    <!-- Default form login -->
+</div>

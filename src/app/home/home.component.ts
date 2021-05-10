@@ -1,4 +1,3 @@
-import { ListKeyManager } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 import { Page } from '../model/page';
 import { tweet } from '../model/tweet';
@@ -19,6 +18,9 @@ export class HomeComponent implements OnInit {
   newReply!:string;
   isError: boolean = false;
   errorMsg: string = "Error";
+  page:number=0;
+  max:number=2;
+  hasNext:boolean=true;
   constructor(private authService: AuthService, private homeService: HomeServiceService) { }
 
   ngOnInit(): void {
@@ -63,8 +65,9 @@ export class HomeComponent implements OnInit {
     });
   }
   getAllTweet() {
-    this.homeService.getAllTweetsOfUser(this.authService.getUserId(), new Page(0, 10)).subscribe((data: any) => {
-      if (data)
+    this.homeService.getAllTweetsOfUser(this.authService.getUserId(), new Page(this.page, this.max)).subscribe((data: any) => {
+      if (data.length>0){
+        this.hasNext=true;
         console.log(data);
       this.tweetList = data.map((val: any) => {
         var diffDays;
@@ -92,19 +95,58 @@ export class HomeComponent implements OnInit {
        else{
         like=[];
        }
+       let reply:any[]=[];
+       if(val.reply!=undefined&&val.reply!=null){
+         reply=val.reply.map((data:any)=>{
+          var diffDays;
+          if (data.date) {
+            let tweetDate = new Date(data.date);
+            let sec= Math.floor((new Date().getTime() - tweetDate.getTime()) / 1000);
+            let min=Math.floor(sec/60);
+            let hours=Math.floor(min/60);
+            let days=Math.floor(hours/24);
+           
+           if(days>0)
+            diffDays = days + " days ago";
+            else if(hours>0)
+            diffDays = hours + " hours ago";
+            else if(min>0)
+            diffDays=min+" mins ago"
+            else 
+            diffDays=sec+" secs ago"
+          }
+           return{
+            id: data.id,
+            tweet: data.tweet,
+            date: diffDays,
+            user: data.user,
+           }
+         })
+       }
         return {
           id: val.id,
           tweet: val.tweet,
           date: diffDays,
           user: val.user,
-          reply: val.reply,
+          reply: reply,
           like: like,
           replyInputEnable:false
         }
       });
+    }else{
+      this.hasNext=false;
+    }
 
       console.log(this.tweetList);
     })
 
+  }
+  next(){
+    this.page++;
+    this.getAllTweet();
+  }
+  prev(){
+    this.page--
+    this.getAllTweet();
   }
 }

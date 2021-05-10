@@ -72,6 +72,11 @@ export class TweetListComponent implements OnInit {
       })
     }
   }
+  delete(tweetId: string) {
+    this.homeService.delete(tweetId).subscribe(data => {
+      this.updateData.emit(null);
+    })
+  }
 
 
 }

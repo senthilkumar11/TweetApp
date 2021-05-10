@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
+import { AllTweetsComponent } from './all-tweets/all-tweets.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './shared/authService/auth.guard';
 import { AuthService } from './shared/authService/auth.service';
@@ -21,6 +22,11 @@ const routes: Routes = [
 }, {
   path: "home",
   component: HomeComponent,
+  canActivate:[AuthGuard]
+
+}, {
+  path: "tweets",
+  component: AllTweetsComponent,
   canActivate:[AuthGuard]
 
 }];

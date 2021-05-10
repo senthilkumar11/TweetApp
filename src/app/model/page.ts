@@ -3,6 +3,6 @@ export class Page{
         this.page=page;
         this.size=size;
     }
-    page:number=0;
-    size:number=10;
+    page:number;
+    size:number;
 }

@@ -9,6 +9,10 @@ import { HttpService } from '../base/http.service';
   providedIn: 'root'
 })
 export class HomeServiceService {
+  delete(tweetId: string) {
+    let userId=this.authService.getUserId();
+  return this.httpService.delete(UrlConstant.tweet+"/"+userId+"/delete/"+tweetId);
+  }
   addLike(tweetId: string) {
     let userId=this.authService.getUserId();
     return this.httpService.put(UrlConstant.tweet+"/"+userId+"/like/"+tweetId);  
@@ -25,7 +29,7 @@ export class HomeServiceService {
   constructor(private httpService:HttpService,private authService:AuthService) { }
 
   getAllTweetsOfUser(userId:String,page:Page){
-    return this.httpService.get(UrlConstant.getUserTweets+"/"+userId, page);
+    return this.httpService.get(UrlConstant.getUserTweets+"/"+userId,"", page);
   }
   
 

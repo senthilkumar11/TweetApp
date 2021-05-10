@@ -5,8 +5,8 @@
             <b>{{tweet.user.username}}</b>
             {{tweet.tweet}}
         </div>
-        <div class="col-4 text-right">
-            {{tweet.date}}
+        <div class="col-4 text-right" style="font-size: small;">
+           <em>{{tweet.date}}</em> 
         </div>
     </div>
     <br>
@@ -17,7 +17,7 @@
             </p>
             
         </i>
-        <i class="fas fa-trash-alt m-3 d-inline-block" *ngIf="tweet.user.id===userId"></i>
+        <i class="fas fa-trash-alt m-3 d-inline-block " *ngIf="tweet.user.id===userId" (click)="delete(tweet.id)"></i>
     </div>
     <div class="row" *ngIf="tweet.replyInputEnable">
         <div class="col text-left">
@@ -31,12 +31,16 @@
             <button class="btn btn-success" (click)="postReply(tweet.id,tweetInput.value)">Post tweet</button>
         </div>
     </div>
-    <div *ngIf="tweet.reply">
-        <div *ngFor="let reply of tweet.reply">
-            <div class="col-8">
+    <div *ngIf="tweet.reply" class="row" style="width: 80%;margin-left: 2%; text-align: center;">
+        <div *ngFor="let reply of tweet.reply" class="col-12">
+            <div class="d-inline-block" style="float: left;">
                <b>{{reply.user.username}}</b> {{reply.tweet}}
             </div>
-
+            <div  class="d-inline-block" style="float: right;">
+                <div style="font-size: small;" >
+                    <em> {{reply.date}}</em>
+                 </div>
+            </div>
         </div>
     </div>
 </div>

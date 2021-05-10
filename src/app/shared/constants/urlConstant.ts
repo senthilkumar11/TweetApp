@@ -3,5 +3,5 @@ export const UrlConstant={
     registerUrl:'api/auth/signup',
     getAllTweet:'api/tweet/all',
     getUserTweets:'api/tweet/user',
-    getTweet:'api/tweet',
+    tweet:'api/tweet',
 }

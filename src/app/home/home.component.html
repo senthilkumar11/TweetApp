@@ -7,19 +7,22 @@
                 {{username}}
             </h3>
         </div>
+
         <div class="col-lg-7">
             <div class="col text-left">
-                <textarea name="tweet" id="tweet" cols="70" rows="4"></textarea>
+                <textarea name="tweet" id="tweet" cols="70" rows="4" [(ngModel)]="newTweet"></textarea>
+            </div>
+            <div *ngIf="isError" class="col text-danger">
+                {{errorMsg}}
             </div>
             <div class="col text-right">
-                <button class="btn btn-success">Post tweet</button>
+
+                <button class="btn btn-success" (click)="postTweet()">Post tweet</button>
             </div>
-            <div *ngFor="let tweet of tweetList" class="container col">
-                {{tweet.tweet}}
-                <mat-icon>reply</mat-icon>
-            </div>
+            <app-tweet-list [tweetList]="tweetList" (updateData)="getAllTweet()"></app-tweet-list>
+
+            <button class="btn btn-secondary">Load More</button>
+            
         </div>
-
-
     </div>
 </div>

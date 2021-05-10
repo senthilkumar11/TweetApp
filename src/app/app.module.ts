@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './shared/authService/token.interceptor';
 import {MatIconModule} from '@angular/material/icon';
+import { TweetListComponent } from './tweet-list/tweet-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatIconModule} from '@angular/material/icon';
     UsersComponent,
     AllTweetsComponent,
     TweetDetailsComponent,
-    ReplyTweetComponent
+    ReplyTweetComponent,
+    TweetListComponent
   ],
   imports: [
     BrowserModule,

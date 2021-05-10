@@ -1,0 +1,42 @@
+<div *ngFor="let tweet of tweetList" class="container border m-3">
+    <div class="row">
+
+        <div class="col-8">
+            <b>{{tweet.user.username}}</b>
+            {{tweet.tweet}}
+        </div>
+        <div class="col-4 text-right">
+            {{tweet.date}}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <i class="fas fa-reply m-3 d-inline-block" style="cursor: pointer;" (click)="tweet.replyInputEnable=!tweet.replyInputEnable; newReply=''"></i>
+        <i class="fas fa-thumbs-up m-3 d-inline-block" [ngClass]="{'text-danger': isLiked(tweet.like)}" (click)="like(tweet.id,tweet)">
+            <p *ngIf="tweet.like&&tweet.like.length>0" class="d-inline-block">{{tweet.like.length}}
+            </p>
+            
+        </i>
+        <i class="fas fa-trash-alt m-3 d-inline-block" *ngIf="tweet.user.id===userId"></i>
+    </div>
+    <div class="row" *ngIf="tweet.replyInputEnable">
+        <div class="col text-left">
+            <textarea name="reply" id="reply" cols="70" rows="4" #tweetInput></textarea>
+        </div>
+        <div *ngIf="isError" class="col text-danger">
+            {{errorMsg}}
+        </div>
+        <div class="col text-right">
+
+            <button class="btn btn-success" (click)="postReply(tweet.id,tweetInput.value)">Post tweet</button>
+        </div>
+    </div>
+    <div *ngIf="tweet.reply">
+        <div *ngFor="let reply of tweet.reply">
+            <div class="col-8">
+               <b>{{reply.user.username}}</b> {{reply.tweet}}
+            </div>
+
+        </div>
+    </div>
+</div>

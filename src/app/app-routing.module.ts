@@ -6,7 +6,12 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './shared/authService/auth.guard';
 import { AuthService } from './shared/authService/auth.service';
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
+    path: "",
+    redirectTo:"home",
+    pathMatch:"full"
+  },{
   path: "login",
   component: LoginComponent
 }, {

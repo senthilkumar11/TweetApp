@@ -1,0 +1,20 @@
+<div style="width: 100%; " class="row d-flex justify-content-center">
+    <div *ngFor="let user of userList" class="border m-3" style="width: 60%; display: block;">
+        <div class="d-inline-block text-left m-2">
+            <b>
+                {{user.username}}
+            </b>
+        </div>
+        <div class="d-inline-block m-2" style="float: right;">
+            <i>
+                {{user.firstname}}
+                {{user.lastname}}
+            </i>
+        </div>
+    </div>
+
+</div>
+<div class="text-center">
+    <button class="btn btn-secondary m-2 mb-5" *ngIf="page!=0" (click)="prev()">Prev</button>
+    <button class="btn btn-secondary m-2 mb-5" *ngIf="hasNext" (click)="next()">Next</button>
+</div>

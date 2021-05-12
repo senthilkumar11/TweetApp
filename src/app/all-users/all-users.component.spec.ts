@@ -1,24 +1,22 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
-import { HeaderComponent } from './header.component';
+import { AllUsersComponent } from './all-users.component';
 
-describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+describe('AllUsersComponent', () => {
+  let component: AllUsersComponent;
+  let fixture: ComponentFixture<AllUsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[HttpClientTestingModule],
-      providers:[JwtHelperService,{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
-      declarations: [ HeaderComponent ],
+      declarations: [ AllUsersComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
+    fixture = TestBed.createComponent(AllUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

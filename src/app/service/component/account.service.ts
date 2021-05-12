@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { login } from 'src/app/model/login';
+import { Page } from 'src/app/model/page';
 import { Register } from 'src/app/model/register';
 import { UrlConstant } from 'src/app/shared/constants/urlConstant';
 import { HttpService } from '../base/http.service';
@@ -8,6 +9,10 @@ import { HttpService } from '../base/http.service';
   providedIn: 'root'
 })
 export class AccountService {
+  getUserList(page: Page) {
+    return this.httpService.get(UrlConstant.getAllUsers+"", page);
+
+  }
   register(register: Register) {
     console.log(register);
     return this.httpService.post(UrlConstant.registerUrl,register);

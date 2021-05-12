@@ -3,33 +3,38 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { AllTweetsComponent } from './all-tweets/all-tweets.component';
+import { AllUsersComponent } from './all-users/all-users.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './shared/authService/auth.guard';
-import { AuthService } from './shared/authService/auth.service';
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo:"home",
-    pathMatch:"full"
-  },{
-  path: "login",
-  component: LoginComponent
-}, {
-  path: "register",
-  component: RegisterComponent,
+    redirectTo: "home",
+    pathMatch: "full"
+  }, {
+    path: "login",
+    component: LoginComponent
+  }, {
+    path: "register",
+    component: RegisterComponent,
 
-}, {
-  path: "home",
-  component: HomeComponent,
-  canActivate:[AuthGuard]
+  }, {
+    path: "home",
+    component: HomeComponent,
+    canActivate: [AuthGuard]
 
-}, {
-  path: "tweets",
-  component: AllTweetsComponent,
-  canActivate:[AuthGuard]
+  }, {
+    path: "tweets",
+    component: AllTweetsComponent,
+    canActivate: [AuthGuard]
 
-}];
+  }, {
+    path: "users",
+    component: AllUsersComponent,
+    canActivate: [AuthGuard]
+
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

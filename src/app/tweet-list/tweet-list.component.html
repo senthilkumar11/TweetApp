@@ -1,7 +1,7 @@
 <div *ngFor="let tweet of tweetList" class="container border m-3">
     <div class="row">
 
-        <div class="col-8">
+        <div class="col-8 tweet">
             <b>{{tweet.user.username}}</b>
             {{tweet.tweet}}
         </div>
@@ -33,7 +33,7 @@
     </div>
     <div *ngIf="tweet.reply" class="row" style="width: 80%;margin-left: 2%; text-align: center;">
         <div *ngFor="let reply of tweet.reply" class="col-12">
-            <div class="d-inline-block" style="float: left;">
+            <div class="d-inline-block tweet" style="float: left;">
                <b>{{reply.user.username}}</b> {{reply.tweet}}
             </div>
             <div  class="d-inline-block" style="float: right;">

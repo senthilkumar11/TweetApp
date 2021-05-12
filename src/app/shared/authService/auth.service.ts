@@ -1,6 +1,6 @@
 import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { observable, Observable, Subject } from 'rxjs';
 import { login } from 'src/app/model/login';
 import { HttpService } from 'src/app/service/base/http.service';
 import { map, catchError } from 'rxjs/operators';
@@ -11,8 +11,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
  
   errorName!: string
-
-
+  authenticated=new Subject<boolean>();
+  public authenticated$ = this.authenticated.asObservable();
 
   constructor(private httpService: HttpService,private jwtService:JwtHelperService) {
   };
@@ -77,13 +77,22 @@ export class AuthService {
   }
   logout() {
    localStorage.clear(); 
+   this.authenticated.next(false);
   }
-  isAuthenticated(){
+  validateToken(){
     let token=this.getToken();
     return token != "" ? !this.jwtService.isTokenExpired(token) : false;
   }
-
-
+  isAuthenticated(){
+    if(this.validateToken())
+    {
+      this.authenticated.next(true);
+      return true;
+    }else{
+      this.authenticated.next(false);
+      return false;
+    }
+  }
 }
 
 

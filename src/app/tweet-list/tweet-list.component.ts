@@ -29,7 +29,7 @@ export class TweetListComponent implements OnInit {
     console.log(tweetId);
     this.newReply = reply
     console.log(this.newReply);
-
+    this.isError=false;
 
     if (this.newReply === undefined || this.newReply === null || this.newReply === "") {
       this.isError = true;
@@ -46,6 +46,7 @@ export class TweetListComponent implements OnInit {
     else if (this.newReply.length > 144) {
       this.isError = true;
       this.errorMsg = "Tweet length cannot be more than 144";
+      return;
     }
     hashTags?.forEach((data) => {
       if (data.length > 50) {
@@ -54,6 +55,7 @@ export class TweetListComponent implements OnInit {
         return;
       }
     })
+    if(!this.isError){
     let newReply = new tweet();
     newReply.tweet = this.newReply;
     console.log(newReply);
@@ -62,6 +64,7 @@ export class TweetListComponent implements OnInit {
       this.newReply = "";
       this.updateData.emit(null);
     });
+  }
 
   }
   like(tweetid: string, tweet: any) {

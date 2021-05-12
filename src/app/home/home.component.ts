@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
  
   postTweet() {
-
+    this.isError=false;
     console.log(this.newTweet);
     if (this.newTweet === undefined || this.newTweet === null) {
       this.isError = true;
@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
     else if (this.newTweet.length > 144) {
       this.isError = true;
       this.errorMsg = "Tweet length cannot be more than 144";
+      return;
     }
     hashTags?.forEach((data) => {
       if (data.length > 50) {
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit {
         return;
       }
     })
+    if(!this.isError){
     let newTweet = new tweet();
     newTweet.tweet = this.newTweet;
     console.log(newTweet);
@@ -63,6 +65,7 @@ export class HomeComponent implements OnInit {
       this.newTweet = "";
       this.getAllTweet();
     });
+  }
   }
   getAllTweet() {
     this.homeService.getAllTweetsOfUser(this.authService.getUserId(), new Page(this.page, this.max)).subscribe((data: any) => {

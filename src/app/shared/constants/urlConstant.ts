@@ -4,4 +4,5 @@ export const UrlConstant={
     getAllTweet:'api/tweet/all',
     getUserTweets:'api/tweet/user',
     tweet:'api/tweet',
+    getAllUsers:"api/tweet/users/all"
 }

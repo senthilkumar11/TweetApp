@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Page } from '../model/page';
 import { user } from '../model/user';
 import { AccountService } from '../service/component/account.service';
@@ -13,7 +14,7 @@ export class AllUsersComponent implements OnInit {
   max:number=2;
   hasNext:boolean=true;
   userList:user[]=[];
-  constructor(private accountService:AccountService) { }
+  constructor(private accountService:AccountService,private router:Router) { }
 
   ngOnInit(): void {
     this.getUserList();
@@ -36,5 +37,10 @@ export class AllUsersComponent implements OnInit {
   prev(){
     this.page--
     this.getUserList();
+  }
+  viewTweets(user:any){
+    localStorage.setItem("usernameTemp",user.username);
+    console.log(user.username);
+    // this.router.navigate(["user",user.id]);
   }
 }

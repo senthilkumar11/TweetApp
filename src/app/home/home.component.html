@@ -9,22 +9,24 @@
         </div>
 
         <div class="col-lg-7">
-            <div class="col text-left">
-                <textarea name="tweet" id="tweet" cols="70" rows="4" [(ngModel)]="newTweet"></textarea>
-            </div>
-            <div *ngIf="isError" class="col text-danger">
-                {{errorMsg}}
-            </div>
-            <div class="col text-right">
-                <button class="btn btn-success" (click)="postTweet()">Post tweet</button>
+            <div *ngIf="userId===id">
+                <div class="col text-left">
+                    <textarea name="tweet" id="tweet" cols="70" rows="4" [(ngModel)]="newTweet"></textarea>
+                </div>
+                <div *ngIf="isError" class="col text-danger">
+                    {{errorMsg}}
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-success" (click)="postTweet()">Post tweet</button>
+                </div>
             </div>
             <app-tweet-list [tweetList]="tweetList" (updateData)="getAllTweet()"></app-tweet-list>
             <div class="text-center">
                 <button class="btn btn-secondary m-2 mb-5" *ngIf="page!=0" (click)="prev()">Prev</button>
-                <button class="btn btn-secondary m-2 mb-5" *ngIf="hasNext"(click)="next()">Next</button>
+                <button class="btn btn-secondary m-2 mb-5" *ngIf="hasNext" (click)="next()">Next</button>
             </div>
-            
-            
+
+
         </div>
     </div>
 </div>

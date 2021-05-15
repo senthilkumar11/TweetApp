@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Page } from '../model/page';
 import { tweet } from '../model/tweet';
 import { HomeServiceService } from '../service/component/home-service.service';
@@ -10,7 +11,7 @@ import { AuthService } from '../shared/authService/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  username: string = "";
+  username: any = "";
   userId: string = ""
   tweet!: tweet;
   tweetList!: any[];
@@ -21,12 +22,22 @@ export class HomeComponent implements OnInit {
   page: number = 0;
   max: number = 2;
   hasNext: boolean = true;
-  constructor(private authService: AuthService, private homeService: HomeServiceService) { }
+  id!: any;
+  constructor(private authService: AuthService, private homeService: HomeServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUserName();
     this.userId = this.authService.getUserId();
-    this.getAllTweet();
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id)
+    if (this.id != null && this.id != undefined) {
+      this.username=localStorage.getItem("usernameTemp");
+      this.getAllTweet();
+    }else{
+      this.id=this.userId;
+      this.getAllTweet();
+    }
+    
   }
 
   postTweet() {
@@ -68,7 +79,7 @@ export class HomeComponent implements OnInit {
     }
   }
   getAllTweet() {
-    this.homeService.getAllTweetsOfUser(this.authService.getUserId(), new Page(this.page, this.max)).subscribe((data: any) => {
+    this.homeService.getAllTweetsOfUser(this.id, new Page(this.page, this.max)).subscribe((data: any) => {
       if (data.length > 0) {
         this.hasNext = true;
         console.log(data);
@@ -138,7 +149,7 @@ export class HomeComponent implements OnInit {
         });
       } else {
         this.hasNext = false;
-        this.tweetList=[];
+        this.tweetList = [];
       }
 
       console.log(this.tweetList);

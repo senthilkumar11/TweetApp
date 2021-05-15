@@ -24,6 +24,12 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard]
 
+  },
+  {
+    path: "tweet/:id",
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+
   }, {
     path: "tweets",
     component: AllTweetsComponent,

@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable,throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class TokenInterceptor implements HttpInterceptor {
                 return error;
             }
     
-            return error;
+            return throwError(error);
                 
         }))
       }

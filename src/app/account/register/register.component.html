@@ -52,7 +52,13 @@
 
         <!-- Sign up button -->
         <button block="true" class="btn btn-primary m-1" type="submit" style="min-width: 200px;" (click)="register()">Sign up</button>
-
+        <div *ngIf="errBol" class="text-danger">
+            {{errMsg}}
+        </div>
+        <div *ngIf="success" class="text-success"> 
+            User registered successfully!
+        </div>
+        
         <!-- Social register
     <p>or sign up with:</p>
 

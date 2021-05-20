@@ -9,6 +9,9 @@ import { AccountService } from 'src/app/service/component/account.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  errBol:boolean=false;
+  errMsg:string="Error";
+  success:boolean=false;
   registerForm: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -24,13 +27,38 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-
-    let register = new Register(this.registerForm.value.username, this.registerForm.value.firstname, this.registerForm.value.lastname, this.registerForm.value.password, this.registerForm.value.e_mail, this.registerForm.value.phoneNumber);
-    this.accountService.register(register).subscribe(result => {
-      console.log(result);
-    }, err => {
-      console.log(err);
-    })
-    console.log(this.registerForm);
+    if(this.registerForm.value.password!=this.registerForm.value.retypePass)
+    {
+      console.log("register");
+      this.errBol=true;
+      this.errMsg="password is not matched with confiem password";
+      return
+    }
+    if (this.registerForm.valid) {
+      let register = new Register(this.registerForm.value.username, this.registerForm.value.firstname, this.registerForm.value.lastname, this.registerForm.value.password, this.registerForm.value.e_mail, this.registerForm.value.phoneNumber);
+      this.accountService.register(register).subscribe(result => {
+        this.registerForm.reset();
+        this.errBol=false;
+        this.success=true;
+        console.log(result);
+      }, err => {
+        if (err.status == 400)
+        {
+          this.errBol=true;
+          if(err.error.message!="")
+          this.errMsg=err.error.message;
+          else{
+            this.errMsg="ERROR cannot  register now"
+          }
+          console.log(err.error);
+        }
+          console.log(err);
+      })
+      console.log(this.registerForm);
+    }
+    else{
+      this.errBol=true;
+      this.errMsg="Error All fields required"
+    }
   }
 }

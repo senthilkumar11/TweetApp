@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "TweetApp"
+  "defaultProject": "TweetApp",
+  "cli": {
+    "analytics": "e58da620-4185-4654-b1b0-958fa6e0ad30"
+  }
 }
